@@ -1,0 +1,148 @@
+@import url("https://fonts.bunny.net/css?family=droid-serif:400,700");
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2a3248;
+  --color-secondary: #a8d3f0;
+  --color-accent: #0e65a9;
+  --color-background: #1a2030;
+  --color-background-deep: #141a26;
+  --color-cream: #e8eef5;
+  --color-muted: #8b9cb3;
+
+  --font-title: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-body: "Droid Serif", Georgia, serif;
+  --font-ui: var(--font-dm-sans), system-ui, sans-serif;
+
+  --shadow-glow: 0 0 60px rgba(14, 101, 169, 0.12);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(168, 211, 240, 0.06);
+  --shadow-card-hover: 0 20px 50px rgba(14, 101, 169, 0.15),
+    0 0 0 1px rgba(168, 211, 240, 0.12);
+  --shadow-elevated: 0 25px 60px -12px rgba(0, 0, 0, 0.45);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-background-deep);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(14, 101, 169, 0.35);
+  color: #fff;
+}
+
+/* Organic blob drift */
+@keyframes blob-drift-1 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -40px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+@keyframes blob-drift-2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-40px, 30px) scale(1.08);
+  }
+}
+
+@keyframes blob-drift-3 {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(25px, 25px) rotate(5deg);
+  }
+}
+
+@keyframes mesh-shift {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+.animate-blob-1 {
+  animation: blob-drift-1 22s ease-in-out infinite;
+}
+
+.animate-blob-2 {
+  animation: blob-drift-2 28s ease-in-out infinite;
+}
+
+.animate-blob-3 {
+  animation: blob-drift-3 18s ease-in-out infinite;
+}
+
+.animate-mesh {
+  animation: mesh-shift 8s ease-in-out infinite;
+}
+
+/* Subtle grid texture */
+.bg-grid {
+  background-image: linear-gradient(
+      rgba(168, 211, 240, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(168, 211, 240, 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(168, 211, 240, 0.15) 20%,
+    rgba(14, 101, 169, 0.3) 50%,
+    rgba(168, 211, 240, 0.15) 80%,
+    transparent
+  );
+}
+
+/* 3D card perspective */
+.perspective-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.text-gradient-premium {
+  background: linear-gradient(
+    135deg,
+    #e8eef5 0%,
+    #a8d3f0 50%,
+    #e8eef5 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
