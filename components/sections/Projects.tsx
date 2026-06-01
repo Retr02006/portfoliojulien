@@ -2,12 +2,15 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { PROJECTS } from "@/lib/constants";
+import { getProjects } from "@/lib/data";
 import type { Project } from "@/lib/types";
 import { Section } from "@/components/ui/Section";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { ProjectCover } from "@/components/ui/ProjectCover";
 import { FadeIn, Stagger, MotionItem } from "@/components/ui/Motion";
 import { cn } from "@/lib/utils";
+
+const projects = getProjects();
 
 function ProjectCard({ project }: { project: Project }) {
   return (
@@ -34,21 +37,27 @@ function ProjectCard({ project }: { project: Project }) {
         >
           <div
             className={cn(
-              "relative h-44 bg-gradient-to-br sm:h-52",
-              project.image,
+              "relative",
+              "h-44 sm:h-52",
               project.featured && "md:h-56"
             )}
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(168,211,240,0.12),transparent_50%)]" />
-            <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-background-deep/60 px-3 py-1 font-[family-name:var(--font-ui)] text-[10px] font-medium uppercase tracking-wider text-secondary backdrop-blur-md">
+            <ProjectCover
+              coverImage={project.coverImage}
+              gradientClass={project.image}
+              alt={project.title}
+              className="absolute inset-0 h-full w-full"
+              priority={project.featured}
+            />
+            <span className="absolute left-4 top-4 z-10 rounded-full border border-white/15 bg-background-deep/60 px-3 py-1 font-[family-name:var(--font-ui)] text-[10px] font-medium uppercase tracking-wider text-secondary backdrop-blur-md">
               {project.type}
             </span>
-            <span className="absolute bottom-4 right-4 font-[family-name:var(--font-ui)] text-xs text-cream/80">
+            <span className="absolute bottom-4 right-4 z-10 font-[family-name:var(--font-ui)] text-xs text-cream/80">
               Voir le détail →
             </span>
           </div>
 
-          <div className="p-6 md:p-8">
+          <div className="relative z-10 p-6 md:p-8">
             <h3 className="font-[family-name:var(--font-title)] text-2xl text-cream md:text-3xl">
               {project.title}
             </h3>
@@ -89,7 +98,7 @@ export function Projects() {
       />
 
       <Stagger className="grid gap-6 md:grid-cols-2">
-        {PROJECTS.map((project) => (
+        {projects.map((project) => (
           <ProjectCard key={project.slug} project={project} />
         ))}
       </Stagger>

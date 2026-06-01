@@ -1,8 +1,17 @@
 import { PROJECTS, STAGES } from "@/lib/constants";
+import { enrichAllProjects, enrichProjectWithImages } from "@/lib/project-images";
 import type { Project, Stage } from "@/lib/types";
 
+const PROJECTS_WITH_MEDIA = enrichAllProjects(PROJECTS);
+
+export function getProjects(): Project[] {
+  return PROJECTS_WITH_MEDIA;
+}
+
 export function getProjectBySlug(slug: string): Project | undefined {
-  return PROJECTS.find((p) => p.slug === slug);
+  const project = PROJECTS.find((p) => p.slug === slug);
+  if (!project) return undefined;
+  return enrichProjectWithImages(project);
 }
 
 export function getStageBySlug(slug: string): Stage | undefined {

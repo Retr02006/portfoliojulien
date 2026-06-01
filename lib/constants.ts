@@ -381,28 +381,6 @@ export const PROJECTS: Project[] = [
         "UX/UI d'application de gestion",
         "Organisation de projet et versioning Git",
       ],
-      gallery: [
-        {
-          src: "from-accent/25 via-primary/50 to-background-deep",
-          alt: "Tableau de bord — vue d'ensemble des locations",
-          gradient: true,
-        },
-        {
-          src: "from-secondary/15 via-accent/20 to-primary/40",
-          alt: "Liste des réservations et filtres",
-          gradient: true,
-        },
-        {
-          src: "from-primary/60 via-background to-accent/15",
-          alt: "Fiche détail d'une location",
-          gradient: true,
-        },
-        {
-          src: "from-background via-primary/50 to-secondary/10",
-          alt: "Formulaire de création / édition",
-          gradient: true,
-        },
-      ],
     },
   },
 ];

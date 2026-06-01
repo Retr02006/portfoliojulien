@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { ProjectLiveButton } from "@/components/detail/ProjectLiveButton";
 import type { DetailContent, GalleryItem } from "@/lib/types";
@@ -9,25 +10,32 @@ interface ProjectDetailContentProps {
 }
 
 function GalleryScreenshot({ img }: { img: GalleryItem }) {
-  const isImage = img.src.startsWith("/");
+  const isFile = img.src.startsWith("/");
 
   return (
     <div className="overflow-hidden rounded-xl border border-white/[0.08] bg-primary/20">
       <div
         className={cn(
-          "aspect-video bg-cover bg-center",
-          img.gradient && `bg-gradient-to-br ${img.src}`
+          "relative aspect-video",
+          img.gradient && !isFile && `bg-gradient-to-br ${img.src}`
         )}
-        style={isImage ? { backgroundImage: `url(${img.src})` } : undefined}
-        role="img"
-        aria-label={img.alt}
       >
-        {img.gradient && (
-          <div className="flex h-full items-center justify-center p-6 text-center">
-            <span className="font-[family-name:var(--font-ui)] text-sm text-muted">
-              {img.alt}
-            </span>
-          </div>
+        {isFile ? (
+          <Image
+            src={img.src}
+            alt={img.alt}
+            fill
+            sizes="(max-width: 768px) 100vw, 400px"
+            className="object-cover object-top"
+          />
+        ) : (
+          img.gradient && (
+            <div className="flex h-full items-center justify-center p-6 text-center">
+              <span className="font-[family-name:var(--font-ui)] text-sm text-muted">
+                {img.alt}
+              </span>
+            </div>
+          )
         )}
       </div>
       <p className="border-t border-white/[0.06] px-4 py-2 font-[family-name:var(--font-ui)] text-xs text-muted">
@@ -118,7 +126,7 @@ export function ProjectDetailContent({
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {content.gallery.map((img) => (
-              <GalleryScreenshot key={img.alt} img={img} />
+              <GalleryScreenshot key={img.src} img={img} />
             ))}
           </div>
         </div>

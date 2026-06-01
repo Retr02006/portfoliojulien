@@ -25,7 +25,10 @@ export interface Project {
   type: string;
   shortDescription: string;
   stack: string[];
+  /** Classes Tailwind gradient — fallback si pas de coverImage */
   image: string;
+  /** Vignette carte projet (ex. /images/projets/fa-1.png) */
+  coverImage?: string;
   github: string | null;
   demo: string | null;
   featured: boolean;
